@@ -1,6 +1,6 @@
-int redPin = 9;
-int greenPin = 8;
-int bluePin = 10;
+int redPin = 10;
+int greenPin = 9;
+int bluePin = 11;
 
 int xAxis = A0;
 int yAxis = A1;
@@ -20,8 +20,8 @@ void setup() {
   pinMode(xAxis, INPUT); //center is (504, 517), min X is 0, max X is 1023
   pinMode(yAxis, INPUT); // min Y is 0, max Y is 1023
 
-  pinMode(lightSensor, INPUT); //0 to ~500, with 0 being bright and 500 being dark
-  //bro this sensor is broken
+  pinMode(lightSensor, INPUT); //0 to 1023, with 0 being dark and 1023 being bright
+  //this sensor is broken
 }
 
 void loop() {
@@ -71,22 +71,8 @@ void joyStickFunction()
   xValue = analogRead(xAxis);
   yValue = analogRead(yAxis);
 
-  if (xValue == 504)
-  {
-    if (yValue > 770)
-    {
-      Serial.println("UP");
-    }
-    else if (yValue < 259)
-    {
-      Serial.println("DOWN");
-    }
-    else
-    {
-      Serial.println("CENTER");
-    }
-  }
-  else if (xValue > 760)
+  
+  if (xValue > 760)
   {
     if (yValue > 770)
     {
@@ -114,6 +100,21 @@ void joyStickFunction()
     else
     {
       Serial.println("RIGHT");
+    }
+  }
+  else
+  {
+    if (yValue > 770)
+    {
+      Serial.println("UP");
+    }
+    else if (yValue < 259)
+    {
+      Serial.println("DOWN");
+    }
+    else
+    {
+      Serial.println("CENTER");
     }
   }
 }
